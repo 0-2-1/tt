@@ -35,11 +35,13 @@ def index():
 
     driver.get('https://dashboard.heroku.com/new-app')
 
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "ember69")))
-    driver.find_element_by_id("ember69").send_keys("seleni")
+    xpath = '/html/body/div[5]/main/div[2]/div[2]/form/div/div[2]/div/input'
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    driver.find_element_by_xpath(xpath).send_keys("seleni")
     time.sleep(5)
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'ember77')))
-    driver.find_element_by_id('ember77').click()
+    xpath = '/html/body/div[5]/main/div[2]/div[2]/form/div/button[2]'
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    driver.find_element_by_xpath(xpath).click()
     return driver.page_source
 
 
