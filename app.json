@@ -1,0 +1,13 @@
+{
+    "name": "tesss",
+    "description": "ttt",
+    "repository": "https://github.com/0-2-1/tt",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
+    "keywords": ["node", "express", "heroku"],
+    "image": "heroku/python",
+    "buildpacks": [
+        {"url": "https://github.com/heroku/heroku-buildpack-google-chrome"},
+        {"url": "https://github.com/heroku/heroku-buildpack-chromedriver"},
+        {"url": "heroku/python"}
+    ]
+}
