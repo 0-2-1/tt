@@ -1,0 +1,11 @@
+flask
+werkzeug
+jinja2
+markupsafe
+click==6.7
+itsdangerous==1.1.0
+requests
+colorama
+psutil
+fire
+selenium
