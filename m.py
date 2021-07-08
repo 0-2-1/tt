@@ -23,32 +23,33 @@ app = Flask(__name__)
 def index():
     driver.get('https://id.heroku.com/login')
 
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, "email")))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "email")))
     driver.find_element_by_id("email").send_keys("mohammadia633@gmail.com")
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, "password")))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "password")))
     driver.find_element_by_id("password").send_keys("moh@mm@dsh@hi0123" + Keys.ENTER)
 
     s = driver.page_source
     if '<h2 class="h3">Secure Your Account</h2>' in s:
-        WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
+        WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
         driver.find_element_by_xpath('//*[@id="mfa-later"]/button').click()
 
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, 'ember36')))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'ember36')))
     driver.find_element_by_id('ember36').click()
 
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, "ember69")))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "ember69")))
     driver.find_element_by_id("ember69").send_keys("seleni")
     time.sleep(5)
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, 'ember77')))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'ember77')))
     driver.find_element_by_id('ember77').click()
     return driver.page_source
 
 
 @app.route('/')
 def xxx():
-    return r
+    return str(r)
 
 
+#https://www.heroku.com/deploy/?template=https://github.com/0-2-1/tt
 threading.Thread(target=app.run, kwargs=dict(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))).start()
 
 while 1:
