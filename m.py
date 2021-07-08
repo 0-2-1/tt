@@ -36,6 +36,7 @@ def index():
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'ember36')))
     driver.find_element_by_id('ember36').click()
 
+    return driver.page_source
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "ember69")))
     driver.find_element_by_id("ember69").send_keys("seleni")
     time.sleep(5)
