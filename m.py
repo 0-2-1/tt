@@ -33,10 +33,8 @@ def index():
         WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
         driver.find_element_by_xpath('//*[@id="mfa-later"]/button').click()
 
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'ember36')))
-    driver.find_element_by_id('ember36').click()
+    driver.get('https://dashboard.heroku.com/new-app')
 
-    return driver.page_source
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "ember69")))
     driver.find_element_by_id("ember69").send_keys("seleni")
     time.sleep(5)
