@@ -23,7 +23,7 @@ def index():
 
 
 @app.route('/')
-def index():
+def xxx():
     return __name__
 
 
