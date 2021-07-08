@@ -1,9 +1,12 @@
 from selenium import webdriver
 from flask import Flask
 import threading, time, os
-
+# print(os.listdir('/app'))
+# print(os.listdir('/app/.apt'))
+# print(os.listdir('/app/.apt/usr'))
+# print(os.listdir('/app/.apt/usr/bin'))
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = "/app/.apt/usr/bin/google_chrome"
+chrome_options.binary_location = "/app/.apt/usr/bin/google-chrome"
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
