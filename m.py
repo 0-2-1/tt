@@ -18,30 +18,54 @@ driver = webdriver.Chrome(executable_path="/app/.chromedriver/bin/chromedriver",
 r= random.randint(0,100)
 app = Flask(__name__)
 
-
-@app.route('/heroku')
-def index():
+def login(email, password):
     driver.get('https://id.heroku.com/login')
 
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "email")))
-    driver.find_element_by_id("email").send_keys("mohammadia633@gmail.com")
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, "password")))
-    driver.find_element_by_id("password").send_keys("moh@mm@dsh@hi0123" + Keys.ENTER)
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "email")))
+    driver.find_element_by_id("email").send_keys(email)
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "password")))
+    driver.find_element_by_id("password").send_keys(password + Keys.ENTER)
 
     s = driver.page_source
     if '<h2 class="h3">Secure Your Account</h2>' in s:
-        WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
         driver.find_element_by_xpath('//*[@id="mfa-later"]/button').click()
 
+
+
+
+@app.route('/heroku')
+def index():
+    login("mohammadia633@gmail.com", "moh@mm@dsh@hi0123")
     driver.get('https://dashboard.heroku.com/new-app')
 
     xpath = '/html/body/div[5]/main/div[2]/div[2]/form/div/div[2]/div/input'
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, xpath)))
-    driver.find_element_by_xpath(xpath).send_keys("seleni")
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    driver.find_element_by_xpath(xpath).send_keys("seleni2")
     time.sleep(5)
     xpath = '/html/body/div[5]/main/div[2]/div[2]/form/div/button[2]'
-    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     driver.find_element_by_xpath(xpath).click()
+
+    driver.get('https://dashboard.heroku.com/logout')
+    login("mohammadia633@gmail.com", "moh@mm@dsh@hi0123")
+    driver.get('https://dashboard.heroku.com/apps/seleni/settings')
+
+    try:
+        xpath = '/html/body/div[5]/main/div[2]/div[2]/ul/li[8]/div/div[2]/p/span/button'
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+        driver.find_element_by_xpath(xpath).click()
+
+        xpath = '/html/body/div[4]/div[1]/div/div/div[2]/div/div/input'
+        driver.find_element_by_xpath(xpath).send_keys("seleni")
+        xpath = '/html/body/div[4]/div[1]/div/div/div[3]/button[2]'
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+        driver.find_element_by_xpath(xpath).click()
+    except Exception:
+        pass
+
+    # deploy
+
     return driver.page_source
 
 
