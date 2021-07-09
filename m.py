@@ -1,6 +1,6 @@
 from selenium import webdriver
 from flask import Flask
-import threading, time, os, random
+import threading, time, os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,8 +14,6 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 
 driver = webdriver.Chrome(executable_path="/app/.chromedriver/bin/chromedriver", chrome_options=chrome_options)
-
-r= random.randint(0,100)
 app = Flask(__name__)
 
 
@@ -68,19 +66,31 @@ def index():
         xpath = '/html/body/div[4]/div[1]/div/div/div[3]/button[2]'
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
         driver.find_element_by_xpath(xpath).click()
-
-        #deleteaccount
     except Exception:
         pass
 
-    # deploy
+    # try:
+    #     # deleteaccount
+    #     xpath = '/html/body/div[5]/main/div[2]/div[2]/ul/li[8]/div/div[2]/p/span/button'
+    #     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    #     driver.find_element_by_xpath(xpath).click()
+
+    #     xpath = '/html/body/div[4]/div[1]/div/div/div[2]/div/div/input'
+    #     driver.find_element_by_xpath(xpath).send_keys("seleni")
+    #     xpath = '/html/body/div[4]/div[1]/div/div/div[3]/button[2]'
+    #     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    #     driver.find_element_by_xpath(xpath).click()
+    # except Exception:
+    #     pass
+
+    # deploy https://dashboard.heroku.com/new?template=https://github.com/0-2-1/tt
 
     return driver.page_source
 
 
 @app.route('/')
 def xxx():
-    return str(r)
+    return str(os.environ)
 
 
 #https://www.heroku.com/deploy/?template=https://github.com/0-2-1/tt
