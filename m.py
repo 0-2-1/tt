@@ -18,7 +18,12 @@ driver = webdriver.Chrome(executable_path="/app/.chromedriver/bin/chromedriver",
 r= random.randint(0,100)
 app = Flask(__name__)
 
-def login(email, password):
+
+def signup(email, password):
+    pass
+
+
+def login(email, password, signup=True):
     driver.get('https://id.heroku.com/login')
 
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "email")))
@@ -30,6 +35,8 @@ def login(email, password):
     if '<h2 class="h3">Secure Your Account</h2>' in s:
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mfa-later"]/button')))
         driver.find_element_by_xpath('//*[@id="mfa-later"]/button').click()
+    # elif notfound and signup:
+    #     signup()
 
 
 
@@ -48,7 +55,7 @@ def index():
     driver.find_element_by_xpath(xpath).click()
 
     driver.get('https://dashboard.heroku.com/logout')
-    login("mohammadia633@gmail.com", "moh@mm@dsh@hi0123")
+    login("mohammadia633@gmail.com", "moh@mm@dsh@hi0123", signup=False)
     driver.get('https://dashboard.heroku.com/apps/seleni/settings')
 
     try:
@@ -61,6 +68,8 @@ def index():
         xpath = '/html/body/div[4]/div[1]/div/div/div[3]/button[2]'
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, xpath)))
         driver.find_element_by_xpath(xpath).click()
+
+        #deleteaccount
     except Exception:
         pass
 
