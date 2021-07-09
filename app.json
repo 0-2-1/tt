@@ -1,10 +1,13 @@
 {
     "name": "tesss",
     "description": "ttt",
-    "image": "heroku/python",
     "buildpacks": [
         {"url": "https://github.com/heroku/heroku-buildpack-google-chrome"},
         {"url": "https://github.com/heroku/heroku-buildpack-chromedriver"},
         {"url": "heroku/python"}
-    ]
+    ],
+    "env":{
+        "CUR_EMAIL":{"description": "current email", "required":true},
+        "CUR_EXPIRE":{"description": "current expire", "required":true}
+    }
 }
